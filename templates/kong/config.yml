@@ -1,0 +1,8 @@
+name: Kong
+description: |
+  Open-Source API Management and Microservice Management
+version: v0.9.0
+category: Load Balancing
+maintainer: 
+minimum_rancher_version: v1.0.0
+license: MIT
