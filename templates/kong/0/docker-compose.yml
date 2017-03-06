@@ -3,6 +3,8 @@ kong-db:
   image: postgres:9.4
   ports:
     - 7732:5432/tcp
+  volumes:
+    - /data/kong/pgdata:/var/lib/postgresql/data
   environment:
     - POSTGRES_USER=kong
     - POSTGRES_DB=kong
@@ -21,8 +23,23 @@ kong:
     - KONG_DATABASE=postgres
     - KONG_PG_HOST=kong-database
   tty: true
-kong-dashboard:
+dashboard:
   image: pgbi/kong-dashboard
+  links:
+    - kong:kong
   ports:
     - 7080:8080/tcp
   tty: true
+konga: 
+  image: pantsel/konga
+  links:
+    - kong:kong
+  ports:
+    - 7300:3000/tcp
+    - 7338:1338/tcp
+  environment:
+    - KONGA_BACKEND_URL={Konga's backend url}
+  tty: true
+ ##Admin login: admin | password: adminadminadmin
+ ##Demo user login: demo | password: demodemodemo
+  
