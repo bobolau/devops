@@ -2,13 +2,10 @@ kong-db:
   restart: always
   image: postgres:9.4
   ports:
-    - 7432:5432/tcp
+    - 7732:5432/tcp
   environment:
     - POSTGRES_USER=kong
     - POSTGRES_DB=kong
-  labels:
-    io.rancher.scheduler.global: 'true'
-    io.rancher.container.pull_image: always
 kong:
   restart: always
   image: kong:0.9.9
@@ -18,21 +15,14 @@ kong:
     - 8000:8000/tcp
     - 8443:8443/tcp
     - 8001:8001/tcp
-	- 7946:7946/tcp
-	- 7946:7946/udp
+    - 7946:7946/tcp
+    - 7946:7946/udp
   environment:
     - KONG_DATABASE=postgres
     - KONG_PG_HOST=kong-database
-  labels:
-    io.rancher.scheduler.global: 'true'
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
   tty: true
 kong-dashboard:
   image: pgbi/kong-dashboard
   ports:
     - 7080:8080/tcp
-  labels:
-    io.rancher.scheduler.global: 'true'
-    io.rancher.container.pull_image: always
   tty: true

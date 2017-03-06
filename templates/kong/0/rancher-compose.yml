@@ -6,7 +6,6 @@
   minimum_rancher_version: v1.0.0
   maintainer: ""
   uuid: kong-0
-  questions:
 kong:
   retain_ip: true
   health_check:
